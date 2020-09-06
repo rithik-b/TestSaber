@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using IPA;
-using IPA.Config;
-using IPA.Config.Stores;
-using UnityEngine.SceneManagement;
-using UnityEngine;
 using IPALogger = IPA.Logging.Logger;
 using BS_Utils.Utilities;
+using UnityEngine;
 
 namespace TestSaber
 {
@@ -49,7 +43,10 @@ namespace TestSaber
         {
             Logger.log.Debug("OnApplicationStart");
             if (Array.Exists<string>(System.Environment.GetCommandLineArgs(), argument => argument == "fpfc"))
+            {
+                PluginUI.instance.Setup();
                 this.addEvents();
+            }
         }
 
         [OnExit]

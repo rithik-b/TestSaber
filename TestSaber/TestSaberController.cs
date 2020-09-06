@@ -30,18 +30,20 @@ namespace TestSaber
         private const float ACCURACY = 90.0f;
         private const string PAUSE_BTTN = "escape";
         private const string QUIT_BTTN = "q";
+        private const string RESTART_BTTN = "r";
 
         internal static void Load()
         {
             new GameObject("TestSaberController").AddComponent<TestSaberController>();
-            instance.StartCoroutine(instance.loadCoroutine());
+            instance.StartCoroutine(instance.LoadCoroutine());
         }
-        private IEnumerator loadCoroutine()
+        private IEnumerator LoadCoroutine()
         {
             yield return new WaitUntil(() => GameObject.FindObjectsOfType<EventManager>() != null);
             eventManagers = GameObject.FindObjectsOfType<EventManager>();
             pauseController = GameObject.FindObjectOfType<PauseController>();
             onPausePressed += Pause;
+            BetterFPFC.Load();
         }
 
         private void Update()
@@ -50,7 +52,7 @@ namespace TestSaber
             {
                 onPausePressed.Invoke();
             }
-            switch(Input.inputString)
+            switch (Input.inputString)
             {
                 case ON_LEVEL_START_BTTN:
                     for (int i=0; i<eventManagers.Length; i++)
@@ -91,10 +93,6 @@ namespace TestSaber
                 case ON_RED_LIGHT_ON_BTTN:
                     for (int i = 0; i < eventManagers.Length; i++)
                         eventManagers[i].OnRedLightOn.Invoke();
-                    try
-                    {
-                        onRestartPressed.Invoke();
-                    } catch(Exception) { }
                     break;
                 case ON_COMBO_CHANGED_BTTN:
                     for (int i = 0; i < eventManagers.Length; i++)
@@ -103,6 +101,13 @@ namespace TestSaber
                 case ON_ACCURACY_CHANGED_BTTN:
                     for (int i = 0; i < eventManagers.Length; i++)
                         eventManagers[i].OnAccuracyChanged.Invoke(ACCURACY);
+                    break;
+                case RESTART_BTTN:
+                    try
+                    {
+                        onRestartPressed.Invoke();
+                    }
+                    catch (Exception) { }
                     break;
                 case QUIT_BTTN:
                     try
@@ -155,6 +160,7 @@ namespace TestSaber
         private void OnDestroy()
         {
             Logger.log?.Debug($"{name}: OnDestroy()");
+            GameObject.Destroy(BetterFPFC.instance);
             instance = null;
         }
     }
