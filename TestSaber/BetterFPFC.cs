@@ -19,8 +19,8 @@ namespace TestSaber
         private static Vector3 characterPosition;
 
         private const string FLY_UP_BTTN = "space";
-        private const string FLY_DOWN_BTTN = "control";
-        private const string FAST_BTTN = "shift";
+        private const string FLY_DOWN_BTTN = "left ctrl";
+        private const string FAST_BTTN = "left shift";
         private const string FORWARD_BTTN = "w";
         private const string REVERSE_BTTN = "s";
         private const string LEFT_BTTN = "a";
@@ -52,33 +52,33 @@ namespace TestSaber
             Vector3 position = instance.transform.position;
             float sens = NORMAL_SENS;
             Vector3 a = Vector3.zero;
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(FORWARD_BTTN))
             {
                 a = camera.transform.forward;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(REVERSE_BTTN))
             {
                 a = -camera.transform.forward;
             }
             Vector3 b = Vector3.zero;
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(RIGHT_BTTN))
             {
                 b = camera.transform.right;
             }
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(LEFT_BTTN))
             {
                 b = -camera.transform.right;
             }
             Vector3 c = Vector3.zero;
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(FLY_UP_BTTN))
             {
                 c = camera.transform.up;
             }
-            if (Input.GetKey(KeyCode.LeftControl))
+            if (Input.GetKey(FLY_DOWN_BTTN))
             {
                 c = -camera.transform.up;
             }
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(FAST_BTTN))
             {
                 sens = FAST_SENS;
             }
@@ -95,8 +95,8 @@ namespace TestSaber
 
         private static void RestoreCameraState()
         {
-            instance.transform.localRotation = characterLocalRotation;
             instance.camera.transform.localRotation = cameraLocalRotation;
+            instance.transform.localRotation = characterLocalRotation;
             instance.transform.position = characterPosition;
         }
 

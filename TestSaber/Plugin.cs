@@ -45,7 +45,7 @@ namespace TestSaber
             if (Array.Exists<string>(System.Environment.GetCommandLineArgs(), argument => argument == "fpfc"))
             {
                 PluginUI.instance.Setup();
-                this.addEvents();
+                this.AddEvents();
             }
         }
 
@@ -56,9 +56,17 @@ namespace TestSaber
 
         }
 
-        private void addEvents()
+        private void AddEvents()
         {
             BSEvents.gameSceneLoaded += TestSaberController.Load;
+            // BSEvents.levelSelected += PrintLevelID;
+            BSEvents.levelFailed += TestSaberController.DestroyInstance;
+            BSEvents.levelCleared += TestSaberController.DestroyInstance;
+        }
+
+        private void PrintLevelID(LevelCollectionViewController levelCollectionViewController, IPreviewBeatmapLevel previewBeatmapLevel)
+        {
+            Logger.log.Critical(previewBeatmapLevel.levelID.ToString());
         }
     }
 }

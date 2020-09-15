@@ -17,7 +17,7 @@ namespace TestSaber
         private const string ON_LEVEL_START_BTTN = "\n";
         private const string ON_LEVEL_ENDED_BTTN = "\b";
         private const string ON_LEVEL_FAIL_BTTN = "f";
-        private const string ON_SLICE_BTTN = " ";
+        private const string ON_SLICE_BTTN = "k";
         private const string ON_COMBO_BREAK_BTTN = "1";
         private const string MULTIPLIER_UP_BTTN = "2";
         private const string SABER_START_COLLIDING_BTTN = "3";
@@ -162,6 +162,11 @@ namespace TestSaber
             Logger.log?.Debug($"{name}: OnDestroy()");
             GameObject.Destroy(BetterFPFC.instance);
             instance = null;
+        }
+
+        internal static void DestroyInstance(StandardLevelScenesTransitionSetupDataSO standardLevelScenesTransitionSetupDataSO, LevelCompletionResults levelCompletionResults)
+        {
+            GameObject.Destroy(instance);
         }
     }
 }

@@ -53,6 +53,7 @@
       <HintPath>$(BeatSaberDir)\Plugins\BS_Utils.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="Colors, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="CustomSaber, Version=4.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>$(BeatSaberDir)\Plugins\CustomSaber.dll</HintPath>
@@ -122,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BetterFPFC.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Configuration\PluginConfig.cs" />
